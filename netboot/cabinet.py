@@ -63,6 +63,8 @@ class Cabinet:
         version: Optional[NetDimmVersionEnum] = None,
         send_timeout: Optional[int] = None,
         time_hack: bool = False,
+        skip_crc: Optional[bool] = False,
+        skip_now_load: Optional[bool] = False,
         enabled: bool = True,
         controllable: bool = True,
         power_cycle: bool = False,
