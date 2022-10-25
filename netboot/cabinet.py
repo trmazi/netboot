@@ -536,6 +536,8 @@ class CabinetManager:
                 controllable=(True if 'controllable' not in cab else bool(cab['controllable'])),
                 power_cycle=(False if 'power_cycle' not in cab else bool(cab['power_cycle'])),
                 time_hack=(False if 'time_hack' not in cab else bool(cab['time_hack'])),
+                skip_crc=(False if 'skip_crc' not in cab else bool(cab['skip_crc'])),
+                skip_now_load=(False if 'skip_now_load' not in cab else bool(cab['skip_now_load'])),
                 send_timeout=(None if 'send_timeout' not in cab else int(cab['send_timeout'])),
             )
             if cabinet.target == NetDimmTargetEnum.TARGET_NAOMI:
@@ -567,6 +569,8 @@ class CabinetManager:
                 'version': cab.version.value,
                 'filename': cab.filename,
                 'time_hack': cab.time_hack,
+                'skip_crc': cab.skip_crc,
+                'skip_now_load': cab.skip_now_load,
                 'roms': cab.patches,
                 # Bytes isn't a serializable type, so serialize it as a list of ints. If the settings is
                 # None for a ROM, serialize it as an empty list.
