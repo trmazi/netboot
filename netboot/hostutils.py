@@ -67,6 +67,8 @@ def _send_file_to_host(
     timeout: Optional[int],
     parent_pid: int,
     progress_queue: "multiprocessing.Queue[Tuple[str, Any]]",
+    skip_crc: Optional[bool] = False,
+    skip_now_load: Optional[bool] = False,
 ) -> None:
     def capture_progress(sent: int, total: int) -> None:
         # See if we need to bail out since our parent disappeared
@@ -87,7 +89,7 @@ def _send_file_to_host(
             data = _handle_patches(data, target, patches, settings)
 
             # Send it
-            netdimm.send(data, progress_callback=capture_progress)
+            netdimm.send(data, progress_callback=capture_progress, disable_crc_check=skip_crc, disable_now_loading=skip_now_load)
 
         progress_queue.put(("success", None))
     except Exception as e:
@@ -116,6 +118,8 @@ class Host:
         send_timeout: Optional[int] = None,
         time_hack: bool = False,
         quiet: bool = False,
+        skip_crc: bool = False,
+        skip_now_load: bool = False,
     ) -> None:
         self.target: NetDimmTargetEnum = target or NetDimmTargetEnum.TARGET_NAOMI
         self.version: NetDimmVersionEnum = version or NetDimmVersionEnum.VERSION_4_01
@@ -124,6 +128,8 @@ class Host:
         self.__poll_reset: bool = False
         self.quiet: bool = quiet
         self.time_hack: bool = time_hack
+        self.skip_crc: bool = skip_crc
+        self.skip_now_load: bool = skip_now_load
         self.send_timeout: Optional[int] = send_timeout
         self.__queue: "multiprocessing.Queue[Tuple[str, Any]]" = multiprocessing.Queue()
         self.__lock: multiprocessing.synchronize.Lock = multiprocessing.Lock()
@@ -135,7 +141,7 @@ class Host:
         self.__thread.start()
 
     def __repr__(self) -> str:
-        return f"Host(ip={repr(self.ip)}, target={repr(self.target)}, version={repr(self.version)}, send_timeout={repr(self.send_timeout)}, time_hack={repr(self.time_hack)})"
+        return f"Host(ip={repr(self.ip)}, target={repr(self.target)}, version={repr(self.version)}, send_timeout={repr(self.send_timeout)}, time_hack={repr(self.time_hack)}, skip_crc={repr(self.skip_crc)}, skip_now_load={repr(self.skip_now_load)})"
 
     def __print(self, string: str, newline: bool = True) -> None:
         if not self.quiet:

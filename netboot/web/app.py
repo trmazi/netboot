@@ -78,6 +78,8 @@ def cabinet_to_dict(cab: Cabinet, dirmanager: DirectoryManager) -> Dict[str, Any
         'power_state': cab.power_state.value,
         'outlet': outlet,
         'time_hack': cab.time_hack,
+        'skip_crc': cab.skip_crc,
+        'skip_now_load': cab.skip_now_load,
         'power_cycle': cab.power_cycle,
         'send_timeout': cab.send_timeout,
     }

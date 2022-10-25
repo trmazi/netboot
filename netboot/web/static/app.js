@@ -428,6 +428,14 @@ Vue.component('cabinetconfig', {
                         <input id="time_hack" type="checkbox" v-model="cabinet.time_hack" />
                         <label for="time_hack">allow boot without key chip</label>
                     </dd>
+                    <dt>Disable CRC Checking</dt><dd>
+                        <input id="skip_crc" type="checkbox" v-model="cabinet.skip_crc" />
+                        <label for="skip_crc">Allow boot without CRC checking. Needed for Chihiro to boot.</label>
+                    </dd>
+                    <dt>Disable "Now Loading" screen.</dt><dd>
+                        <input id="skip_now_load" type="checkbox" v-model="cabinet.skip_now_load" />
+                        <label for="skip_now_load">Disables the "Now loading a game program" screen.</label>
+                    </dd>
                     <dt>Send Timeout</dt><dd>
                         <input id="send_timeout_enabled" type="checkbox" v-model="send_timeout_enabled" />
                         <label for="send_timeout_enabled">enable alternative send timeout</label>
@@ -924,6 +932,8 @@ Vue.component('newcabinet', {
                 'description': '',
                 'ip': '',
                 'time_hack': false,
+                'skip_crc': false,
+                'skip_now_load': false,
                 'send_timeout_enabled': false,
                 'send_timeout_seconds': window.timeouts[window.targets[0]],
                 'region': window.regions[0],
@@ -1011,6 +1021,14 @@ Vue.component('newcabinet', {
                 <dt>Keyless Boot</dt><dd>
                     <input id="time_hack" type="checkbox" v-model="cabinet.time_hack" />
                     <label for="time_hack">allow boot without key chip</label>
+                </dd>
+                <dt>Disable CRC Checking</dt><dd>
+                    <input id="skip_crc" type="checkbox" v-model="cabinet.skip_crc" />
+                    <label for="skip_crc">Allow boot without CRC checking. Needed for Chihiro to boot.</label>
+                </dd>
+                <dt>Disable "Now Loading" screen.</dt><dd>
+                    <input id="skip_now_load" type="checkbox" v-model="cabinet.skip_now_load" />
+                    <label for="skip_now_load">Disables the "Now loading a game program" screen.</label>
                 </dd>
                 <dt>Send Timeout</dt><dd>
                     <input id="send_timeout_enabled" type="checkbox" v-model="cabinet.send_timeout_enabled" />

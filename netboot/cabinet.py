@@ -185,6 +185,22 @@ class Cabinet:
         self.__host.time_hack = time_hack
 
     @property
+    def skip_crc(self) -> bool:
+        return self.__host.skip_crc
+
+    @skip_crc.setter
+    def skip_crc(self, skip_crc: bool) -> None:
+        self.__host.skip_crc = skip_crc
+
+    @property
+    def skip_now_load(self) -> bool:
+        return self.__host.skip_now_load
+
+    @skip_now_load.setter
+    def skip_now_load(self, skip_now_load: bool) -> None:
+        self.__host.skip_now_load = skip_now_load
+
+    @property
     def send_timeout(self) -> Optional[int]:
         return self.__host.send_timeout
 
