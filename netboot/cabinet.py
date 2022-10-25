@@ -368,10 +368,14 @@ class Cabinet:
                 elif self.__host.status == HostStatusEnum.STATUS_FAILED:
                     self.__print(f"Cabinet {self.ip} failed to send game, waiting for power on.")
                     self.__state = (CabinetStateEnum.STATE_WAIT_FOR_CABINET_POWER_ON, 0)
-                elif self.__host.status == HostStatusEnum.STATUS_COMPLETED:
+                elif self.__host.status == HostStatusEnum.STATUS_COMPLETED and not self.skip_crc:
                     self.__print(f"Cabinet {self.ip} succeeded sending game, rebooting and verifying game CRC.")
                     self.__host.reboot()
                     self.__state = (CabinetStateEnum.STATE_CHECK_CURRENT_GAME, 0)
+                elif self.__host.status == HostStatusEnum.STATUS_COMPLETED and self.skip_crc:
+                    self.__print(f"Cabinet {self.ip} succeeded sending game! CRC disabled, consider it running!")
+                    self.__host.reboot()
+                    self.__state = (CabinetStateEnum.STATE_WAIT_FOR_CABINET_POWER_OFF, 0)
                 return
 
             # Wait for the CRC verification screen to finish. Transition to waiting
