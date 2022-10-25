@@ -14,7 +14,7 @@ from smartoutlet import ALL_OUTLET_CLASSES
 
 
 current_directory: str = os.path.abspath(os.path.dirname(__file__))
-print(os.path.join(current_directory, 'static'))
+
 app = Flask(
     __name__,
     static_folder=os.path.join(current_directory, 'static'),
