@@ -315,7 +315,7 @@ class Host:
                 raise HostException("Host has active transfer already")
             self.__lastprogress = (-1, -1)
             self.__laststatus = None
-            self.__print(f"Host {self.ip} started sending image.")
+            self.__print(f"Host {self.ip} started sending image. CRC verification disabled = {self.skip_crc}")
 
             # Start the send
             self.__proc = multiprocessing.Process(
