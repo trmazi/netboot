@@ -414,8 +414,8 @@ class Cabinet:
                             # while the cabinet was already running, it would have no way to synchronize with the state of
                             # the world. If that's what you really want, you should probably just be using "netdimm_send"
                             # instead of managing the cabinet through this class. So, resend the game if we hit this.
-                            self.__print(f"Cabinet {self.ip} had CRC verification disabled for {self.__current_filename}, waiting for power on.")
-                            self.__state = (CabinetStateEnum.STATE_WAIT_FOR_CABINET_POWER_ON, 0)
+                            self.__print(f"Cabinet {self.ip} had CRC verification disabled for {self.__current_filename}, waiting for power off.")
+                            self.__state = (CabinetStateEnum.STATE_WAIT_FOR_CABINET_POWER_OFF, 0)
                         elif info.game_crc_status in {CRCStatusEnum.STATUS_INVALID, CRCStatusEnum.STATUS_BAD_MEMORY}:
                             # Game failed onboard CRC, try sending again!
                             self.__print(f"Cabinet {self.ip} failed CRC verification for {self.__current_filename}, waiting for power on.")
