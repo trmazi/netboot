@@ -320,7 +320,7 @@ class Host:
             # Start the send
             self.__proc = multiprocessing.Process(
                 target=_send_file_to_host,
-                args=(self.ip, filename, patches, settings, self.target, self.version, self.send_timeout, os.getpid(), self.__queue),
+                args=(self.ip, filename, patches, settings, self.target, self.version, self.send_timeout, os.getpid(), self.__queue, self.skip_crc, self.skip_now_load),
             )
             self.__proc.start()
 
