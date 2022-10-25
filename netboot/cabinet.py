@@ -78,7 +78,7 @@ class Cabinet:
         self.quiet = quiet
         self.power_cycle = power_cycle
         self.__enabled = enabled
-        self.__host: Host = Host(ip, target=target, version=version, send_timeout=send_timeout, time_hack=time_hack, quiet=self.quiet)
+        self.__host: Host = Host(ip, target=target, version=version, send_timeout=send_timeout, time_hack=time_hack, quiet=self.quiet, skip_crc=skip_crc, skip_now_load=skip_now_load)
         self.__lock: threading.Lock = threading.Lock()
         self.__current_filename: Optional[str] = filename
         self.__new_filename: Optional[str] = filename
