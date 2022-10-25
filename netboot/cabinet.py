@@ -402,6 +402,8 @@ class Cabinet:
                     except NetDimmException:
                         info = None
                     if info is not None and info.current_game_crc != 0:
+                        if self.skip_crc:
+                            info.game_crc_status = CRCStatusEnum.STATUS_DISABLED
                         if info.game_crc_status == CRCStatusEnum.STATUS_VALID:
                             # Game passed onboard CRC, consider it running!
                             self.__print(f"Cabinet {self.ip} passed CRC verification for {self.__current_filename}, waiting for power off.")
