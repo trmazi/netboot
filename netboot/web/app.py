@@ -20,7 +20,6 @@ app = Flask(
     template_folder=os.path.join(current_directory, 'templates'),
 )
 app.static_folder = os.path.join(current_directory, 'static')
-app.static_url_path = '/static'
 
 class EverythingConverter(PathConverter):
     regex = '.*?'
