@@ -1,4 +1,4 @@
-include netboot/web/static/*.css
-include netboot/web/static/*.js
-include netboot/web/static/*.gif
-include netboot/web/static/templates/*.html
+include netboot/web/staticfile/*.css
+include netboot/web/staticfile/*.js
+include netboot/web/staticfile/*.gif
+include netboot/web/staticfile/templates/*.html

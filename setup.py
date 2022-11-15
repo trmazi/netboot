@@ -25,7 +25,7 @@ if 'FULL_INSTALLATION' in os.environ:
             # Web server package.
             'netboot',
             'netboot.web',
-            'netboot.web.static',
+            'netboot.web.staticfile',
             'netboot.web.templates',
         ],
         install_requires=[
