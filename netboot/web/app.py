@@ -17,9 +17,9 @@ current_directory: str = os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(
     __name__,
+    static_folder=os.path.join(current_directory, 'static'),
     template_folder=os.path.join(current_directory, 'templates'),
 )
-app.static_folder = os.path.join(current_directory, 'static')
 
 class EverythingConverter(PathConverter):
     regex = '.*?'
