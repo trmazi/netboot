@@ -33,9 +33,7 @@ if 'FULL_INSTALLATION' in os.environ:
         ],
         package_data={
             # Make sure to actually include the trojan data.
-            "homebrew.settingstrojan": ["settingstrojan.bin"],
-            "netboot.web.static": ["*.js", "*.css", "*.gif"],
-            "netboot.web.templates": ["*.html"],
+            "homebrew.settingstrojan": ["settingstrojan.bin"]
         },
         python_requires=">=3.6",
     )

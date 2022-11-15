@@ -8,7 +8,6 @@ __pycache__/
 build/
 libnaomi.a
 libnaomimessage.a
-MANIFEST.in
 build/
 download/
 dist/

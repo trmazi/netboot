@@ -1,0 +1,4 @@
+include netboot/web/static/*.css
+include netboot/web/static/*.js
+include netboot/web/static/*.gif
+include netboot/web/static/templates/*.html
