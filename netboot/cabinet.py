@@ -645,6 +645,8 @@ class CabinetManager:
         version: Union[Optional[NetDimmVersionEnum], EmptyObject] = empty,
         send_timeout: Union[Optional[int], EmptyObject] = empty,
         time_hack: Optional[bool] = None,
+        skip_crc: Optional[bool] = None,
+        skip_now_load: Optional[bool] = None,
         controllable: Optional[bool] = None,
         power_cycle: Optional[bool] = None,
         enabled: Optional[bool] = None,
@@ -676,6 +678,10 @@ class CabinetManager:
                 existing_cab.enabled = enabled
             if time_hack is not None:
                 existing_cab.time_hack = time_hack
+            if skip_crc is not None:
+                existing_cab.skip_crc = skip_crc
+            if skip_now_load is not None:
+                existing_cab.skip_now_load = skip_now_load
             if controllable is not None:
                 existing_cab.controllable = controllable
             if power_cycle is not None:
