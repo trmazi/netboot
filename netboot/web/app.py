@@ -442,6 +442,8 @@ def createcabinet(ip: str) -> Dict[str, Any]:
         version=NetDimmVersionEnum(request.json['version']),
         enabled=True,
         time_hack=request.json['time_hack'],
+        skip_crc=False,
+        skip_now_load=False,
         power_cycle=False,
         send_timeout=request.json['send_timeout'] or None,
     )
@@ -465,6 +467,8 @@ def updatecabinet(ip: str) -> Dict[str, Any]:
         version=NetDimmVersionEnum(request.json['version']),
         enabled=request.json['enabled'],
         time_hack=request.json['time_hack'],
+        skip_crc=request.json['skip_crc'],
+        skip_now_load=request.json['skip_now_load'],
         send_timeout=request.json['send_timeout'] or None,
     )
     serialize_app(app)
