@@ -90,7 +90,7 @@ def _send_file_to_host(
 
             # Send it
             if target == NetDimmTargetEnum.TARGET_TRIFORCE:
-                netdimm.patch_check_boot_id(version)
+                netdimm.patch_check_boot_id()
 
             netdimm.send(data, progress_callback=capture_progress, disable_crc_check=skip_crc, disable_now_loading=skip_now_load)
 
