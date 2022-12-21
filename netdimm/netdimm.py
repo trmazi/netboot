@@ -454,6 +454,27 @@ class NetDimm:
         self.__validate_address(addr, type)
         self.__send_packet(NetDimmPacket(0x11, 0x00, struct.pack("<III", addr, type.value, data)))
 
+    def __patch_check_boot_id(self, dimm_ver: str = '3.01') -> None:
+        # From PyForce Tools
+
+        # this essentially removes a region check, and is triforce-specific; It's also segaboot-version specific.
+        # - look for string: "CLogo::CheckBootId: skipped."
+        # - binary-search for lower 16bit of address
+
+        if dimm_ver == '3.01':
+            addr = 0x8000dc5c
+            self.__host_poke(addr + 0, 0x4800001C, PeekPokeTypeEnum.TYPE_BYTE)
+            return
+        elif dimm_ver in ['2.03', '2.15']:
+            addr = 0x8000CC6C
+        elif dimm_ver == '1.07':
+            addr = 0x8000d8a0
+        self.__host_poke(addr + 0, 0x4e800020, PeekPokeTypeEnum.TYPE_BYTE)
+        self.__host_poke(addr + 4, 0x38600000, PeekPokeTypeEnum.TYPE_BYTE)
+        self.__host_poke(addr + 8, 0x4e800020, PeekPokeTypeEnum.TYPE_BYTE)
+        self.__host_poke(addr + 0, 0x60000000, PeekPokeTypeEnum.TYPE_BYTE)
+        return
+
     def __host_control_read(self) -> int:
         # Read the control data location from the host that the net dimm is plugged into.
         self.__send_packet(NetDimmPacket(0x16, 0x00))
@@ -492,7 +513,7 @@ class NetDimm:
         # 1 - System was requested to display "NOW LOADING..." and is rebooting into that mode.
         # 2 - System is in "NOW LOADING..." mode but no transfer has been initiated.
         # 10 - System is in "NOW LOADING..." mode and a transfer has been initiated, rebooting naomi before continuing.
-        # 20 - System is in "NOW LIADING..." mode and a transfer is continuing.
+        # 20 - System is in "NOW LOADING..." mode and a transfer is continuing.
         return self.__exchange_host_mode(0xFF, 0)
 
     def __exchange_dimm_mode(self, mask_bits: int, set_bits: int) -> int:
