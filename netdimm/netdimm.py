@@ -454,7 +454,7 @@ class NetDimm:
         self.__validate_address(addr, type)
         self.__send_packet(NetDimmPacket(0x11, 0x00, struct.pack("<III", addr, type.value, data)))
 
-    def __patch_check_boot_id(self, dimm_ver: str = '3.01') -> None:
+    def patch_check_boot_id(self, dimm_ver: str = '3.01') -> None:
         # From PyForce Tools
 
         # this essentially removes a region check, and is triforce-specific; It's also segaboot-version specific.
